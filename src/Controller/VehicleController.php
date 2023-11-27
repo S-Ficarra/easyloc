@@ -59,4 +59,39 @@ class VehicleController extends AbstractController
         ]);
     }
 
+    public function rechercherVehicule(Request $request): Response 
+    {
+        // Récupére les paramètres de recherche depuis la requête
+        $searchId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+        $searchLicencePlate = filter_input(INPUT_GET, 'licence_plate', FILTER_SANITIZE_STRING);
+    
+        // Initialise une variable pour stocker les résultats de la recherche
+        $results = [];
+    
+        // Effectue la recherche en fonction des paramètres fournis
+        if ($searchId) {
+            // Recherche par ID
+            $vehicle = $this->dm->getRepository(VehicleDocument::class)->find($searchId);
+    
+            if ($vehicle) {
+                $results[] = $vehicle;
+            }
+        } elseif ($searchLicencePlate) {
+            // Recherche par plaque d'immatriculation
+            $vehicle = $this->dm->getRepository(VehicleDocument::class)->findOneBy(['licencePlate' => $searchLicencePlate]);
+    
+            if ($vehicle) {
+                $results[] = $vehicle;
+            }
+        } else {
+            // Si aucun paramètre spécifié, affiche tous les véhicules
+            $results = $this->dm->getRepository(VehicleDocument::class)->findAll();
+        }
+    
+        // Effectue le rendu de la vue en lui transmettant les résultats de la recherche
+        return $this->render('rechercher_vehicule.html.twig', [
+            'results' => $results,
+        ]);
+    } 
+
 }

@@ -1,0 +1,43 @@
+{# templates/vehicle/chercher_vehicule.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Rechercher un véhicule</h1>
+
+    <form action="{{ path('chercher_vehicule') }}" method="get">
+        <label for="id">ID :</label>
+        <input type="text" id="id" name="id">
+
+        <label for="licence_plate">Plaque d'immatriculation :</label>
+        <input type="text" id="licence_plate" name="licence_plate">
+
+        <button type="submit">Rechercher</button>
+    </form>
+
+    {% if results is not empty %}
+        <h2>Liste des véhicules</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="row">ID</th>
+                    <th scope="row">PLAQUE</th>
+                    <th scope="row">INFORMATIONS</th>
+                    <th scope="row">KILOMÉTRAGE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle in results %}
+                <tr>
+                    <td>{{ vehicle.getId() }}</td> 
+                    <td>{{ vehicle.getLicencePlate() }}</td>
+                    <td>{{ vehicle.getInformations() }}</td>
+                    <td>{{ vehicle.getKm() }} km</td>
+                </tr>
+                {% endfor %}
+            </tbody>            
+        </table>    
+    {% else %}
+        <p>Aucun résultat trouvé.</p>
+    {% endif %}
+{% endblock %}
