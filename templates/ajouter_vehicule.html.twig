@@ -1,0 +1,24 @@
+{# templates/vehicle/ajouter_vehicule.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajouter un véhicule</h1>
+
+    {% if successMessage is defined %}
+        <div class="alert alert-success">
+            {{ successMessage }}
+        </div>
+        <a href="{{ path('ajouter_vehicule') }}"><button>Ajouter un nouveau véhicule</button></a>
+    {% else %}
+        {{ form_start(form) }}
+        {{ form_row(form.licencePlate) }}
+        {{ form_row(form.informations) }}
+        {{ form_row(form.km) }}
+
+        <button type="submit">Valider</button>
+    {% endif %}
+
+
+
+{% endblock %}
