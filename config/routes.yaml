@@ -7,4 +7,7 @@ rechercher_vehicule:
 modifier_vehicule:
     path: /modifier-vehicule/{licencePlate}
     controller: App\Controller\VehicleController::modifierVehicule
+supprimer_vehicule:
+    path: /supprimer-vehicule/{licencePlate}
+    controller: App\Controller\VehicleController::supprimerVehicule
 

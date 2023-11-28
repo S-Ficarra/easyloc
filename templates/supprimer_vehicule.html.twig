@@ -1,0 +1,33 @@
+{# templates/vehicle/supprimer_vehicule.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if successMessage is defined %}
+        <div class="alert alert-success">
+            {{ successMessage }}
+        </div>
+        <a href="{{ path('rechercher_vehicule') }}"><button>Retour aux résultats</button></a>
+    {% else %}
+        <form method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="text-center">Êtes-vous sûr de vouloir supprimer ce véhicule : </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ vehicleToDelete.getId() }}</td> 
+                        <td>{{ vehicleToDelete.getLicencePlate() }}</td>
+                        <td>{{ vehicleToDelete.getInformations() }}</td>
+                        <td>{{ vehicleToDelete.getKm() }} km</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-center"><button type="submit">Supprimer</button></div>
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,4 +1,4 @@
-{# templates/vehicle/chercher_vehicule.html.twig #}
+{# templates/vehicle/rechercher_vehicule.html.twig #}
 
 {% extends 'base.html.twig' %}
 
@@ -53,7 +53,7 @@
                     <td>{{ vehicle.getInformations() }}</td>
                     <td>{{ vehicle.getKm() }} km</td>
                     <td><button><a href="{{ path('modifier_vehicule', {'licencePlate': vehicle.getLicencePlate()}) }}">Modifier</a></button></td>
-                    <!--<td><button><a href="{{ path('ajouter_vehicule', {'id': vehicle.getId()}) }}" >Supprimer</a></button></td>-->
+                    <td><button><a href="{{ path('supprimer_vehicule', {'licencePlate': vehicle.getLicencePlate()}) }}" >Supprimer</a></button></td>
 
                 </tr>
                 {% endfor %}

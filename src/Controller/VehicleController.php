@@ -138,6 +138,30 @@ class VehicleController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
+    /**
+     * @Route("/supprimer-vehicule", name="supprimer_vehicule")
+     */
+    public function supprimerVehicule (Request $request, $licencePlate) : Response 
+    {
+        $vehicleToDelete = $this->dm->getRepository(VehicleDocument::class)->findOneBy(['licencePlate' => $licencePlate]);
+
+        if ($request->isMethod('POST')) {
+            $this->dm->remove($vehicleToDelete);
+            $this->dm->flush();
+
+            $successMessage = 'Véhicule supprimé avec succès!';
+
+            return $this->render('supprimer_vehicule.html.twig', [
+                'successMessage' => $successMessage,
+            ]);
+        }
+
+        return $this->render('supprimer_vehicule.html.twig', [
+            'vehicleToDelete' => $vehicleToDelete,
+        ]);
+
+    }    
+
 
 }
