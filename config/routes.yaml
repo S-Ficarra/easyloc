@@ -1,7 +1,7 @@
 ajouter_vehicule:
     path: /ajouter-vehicule
     controller: App\Controller\VehicleController::ajouterVehicule
-chercher_vehicule:
+rechercher_vehicule:
     path: /rechercher-vehicule
     controller: App\Controller\VehicleController::rechercherVehicule
 

@@ -5,15 +5,27 @@
 {% block body %}
     <h1>Rechercher un véhicule</h1>
 
-    <form action="{{ path('chercher_vehicule') }}" method="get">
-        <label for="id">ID :</label>
-        <input type="text" id="id" name="id">
-
-        <label for="licence_plate">Plaque d'immatriculation :</label>
-        <input type="text" id="licence_plate" name="licence_plate">
-
-        <button type="submit">Rechercher</button>
-    </form>
+    <div >
+        <form action="{{ path('rechercher_vehicule') }}" method="get">
+            <label for="id">ID :</label>
+            <input type="text" id="id" name="id">
+            <br>
+            <label for="licence_plate">Plaque d'immatriculation :</label>
+            <input type="text" id="licence_plate" name="licence_plate">
+            <br>
+            <div>
+                <label for="km">Kilomètres :</label>
+                <input type="number" id="km" name="km_value" min=0 max=999999>
+                <button type="submit">Rechercher</button>
+            </div>
+            <div>
+                <input type="radio" id="plus" value="plus" name="km" checked="true">
+                <label for="plus">Plus de</label>
+                <input type="radio" id="moins" value="moins" name="km">
+                <label for="moins">Moins de</label>
+            </div>
+        </form>
+    </div>
 
     {% if results is not empty %}
         <h2>Liste des véhicules</h2>
@@ -35,6 +47,9 @@
                     <td>{{ vehicle.getKm() }} km</td>
                 </tr>
                 {% endfor %}
+                <tr>
+                    <th colspan="4" class="text-center">TOTAL : {{ results|length }} </th>
+                </tr>
             </tbody>            
         </table>    
     {% else %}

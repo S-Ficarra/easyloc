@@ -64,6 +64,8 @@ class VehicleController extends AbstractController
         // Récupére les paramètres de recherche depuis la requête
         $searchId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
         $searchLicencePlate = filter_input(INPUT_GET, 'licence_plate', FILTER_SANITIZE_STRING);
+        $searchKmValue = filter_input(INPUT_GET, 'km_value', FILTER_SANITIZE_NUMBER_INT);
+        $moreLess = $request->query->get('km');
     
         // Initialise une variable pour stocker les résultats de la recherche
         $results = [];
@@ -83,6 +85,11 @@ class VehicleController extends AbstractController
             if ($vehicle) {
                 $results[] = $vehicle;
             }
+        } elseif ($searchKmValue && ($moreLess === 'plus' || $moreLess === 'moins')) {
+            $moreLessValue = ($moreLess === 'plus') ? '$gte' : '$lte';
+            $criteria = ['km' => [$moreLessValue => (int)$searchKmValue]];
+            $results = $this->dm->getRepository(VehicleDocument::class)->findBy($criteria);
+
         } else {
             // Si aucun paramètre spécifié, affiche tous les véhicules
             $results = $this->dm->getRepository(VehicleDocument::class)->findAll();
