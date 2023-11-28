@@ -4,4 +4,7 @@ ajouter_vehicule:
 rechercher_vehicule:
     path: /rechercher-vehicule
     controller: App\Controller\VehicleController::rechercherVehicule
+modifier_vehicule:
+    path: /modifier-vehicule/{licencePlate}
+    controller: App\Controller\VehicleController::modifierVehicule
 

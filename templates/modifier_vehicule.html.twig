@@ -1,0 +1,20 @@
+{# templates/vehicle/modifier_vehicule.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier un véhicule</h1>
+    {% if successMessage is defined %}
+        <div class="alert alert-success">
+            {{ successMessage }}
+        </div>
+        <a href="{{ path('rechercher_vehicule') }}"><button>Retour aux résultats</button></a>
+    {% else %}
+    {{ form_start(form) }}
+    {{ form_row(form.licencePlate) }}
+    {{ form_row(form.informations) }}
+    {{ form_row(form.km) }}
+
+    {{ form_end(form) }}
+    {% endif %}
+{% endblock %}

@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use App\Document\VehicleDocument; 
 use App\Form\VehicleType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class VehicleController extends AbstractController
 {
@@ -59,6 +61,9 @@ class VehicleController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/rechercher-vehicule", name="rechercher_vehicule")
+     */
     public function rechercherVehicule(Request $request): Response 
     {
         // Récupére les paramètres de recherche depuis la requête
@@ -100,5 +105,39 @@ class VehicleController extends AbstractController
             'results' => $results,
         ]);
     } 
+
+    /**
+     * @Route("/modifier-vehicule", name="modifier_vehicule")
+     */
+    public function modifierVehicule (Request $request, $licencePlate) : Response
+    {
+        $vehicleToModify = $this->dm->getRepository(VehicleDocument::class)->findOneBy(['licencePlate' => $licencePlate]);
+
+        if (!$vehicleToModify) {
+            throw $this->createNotFoundException('Véhicule non trouvé');
+        }
+        
+        $form = $this->createForm(VehicleType::class, $vehicleToModify)
+            ->add('modifier', SubmitType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->dm->flush();
+
+            $successMessage = 'Véhicule modifié avec succès!';
+
+            // Redirigez l'utilisateur vers la page de recherche avec un message de succès
+            return $this->render('modifier_vehicule.html.twig', [
+                'form' => $form->createView(),
+                'successMessage' => $successMessage,
+            ]);
+        }
+
+        return $this->render('modifier_vehicule.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    
 
 }

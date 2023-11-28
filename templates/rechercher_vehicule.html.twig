@@ -29,6 +29,11 @@
 
     {% if results is not empty %}
         <h2>Liste des véhicules</h2>
+        {% if successMessage is defined %}
+            <div class="alert alert-success">
+                {{ successMessage }}
+            </div>
+        {% endif %}
         <table class="table">
             <thead>
                 <tr>
@@ -36,6 +41,8 @@
                     <th scope="row">PLAQUE</th>
                     <th scope="row">INFORMATIONS</th>
                     <th scope="row">KILOMÉTRAGE</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -45,10 +52,13 @@
                     <td>{{ vehicle.getLicencePlate() }}</td>
                     <td>{{ vehicle.getInformations() }}</td>
                     <td>{{ vehicle.getKm() }} km</td>
+                    <td><button><a href="{{ path('modifier_vehicule', {'licencePlate': vehicle.getLicencePlate()}) }}">Modifier</a></button></td>
+                    <!--<td><button><a href="{{ path('ajouter_vehicule', {'id': vehicle.getId()}) }}" >Supprimer</a></button></td>-->
+
                 </tr>
                 {% endfor %}
                 <tr>
-                    <th colspan="4" class="text-center">TOTAL : {{ results|length }} </th>
+                    <th colspan="6" class="text-center">TOTAL : {{ results|length }} </th>
                 </tr>
             </tbody>            
         </table>    
