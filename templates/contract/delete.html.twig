@@ -1,0 +1,42 @@
+{# templates/contract/show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Contrat{% endblock %}
+
+{% block body %}
+
+    {% if successMessage is defined %}
+            <div class="alert alert-success">
+            {{ successMessage }}
+        </div>
+        <a href="{{ path('afficher_contrat') }}"><button>Retour aux résultats</button></a>
+
+    {% else %}
+    <h1>Détails du Contrat</h1>
+    
+    <dl>
+        <dt>ID</dt>
+        <dd>{{ contract.id }}</dd>
+        <dt>Vehicle UID</dt>
+        <dd>{{ contract.vehicleUid }}</dd>
+        <dt>Customer UID</dt>
+        <dd>{{ contract.customerUid }}</dd>
+        <dt>Sign Datetime</dt>
+        <dd>{{ contract.signDatetime|date('Y-m-d H:i:s') }}</dd>
+        <dt>Loc Begin Datetime</dt>
+        <dd>{{ contract.locBeginDatetime|date('Y-m-d H:i:s') }}</dd>
+        <dt>Loc End Datetime</dt>
+        <dd>{{ contract.locEndDatetime|date('Y-m-d H:i:s') }}</dd>
+        <dt>Returning Datetime</dt>
+        <dd>{{ contract.returningDatetime ? contract.returningDatetime|date('Y-m-d H:i:s') : 'N/A' }}</dd>
+        <dt>Price</dt>
+        <dd>{{ contract.price }}</dd>
+    </dl>
+
+    <form method="post" action="{{ path('supprimer_contrat', {'id': contract.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce contrat ?')">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit">Supprimer</button>
+    </form>
+    {% endif %}
+{% endblock %}

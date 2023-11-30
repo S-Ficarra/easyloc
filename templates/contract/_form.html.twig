@@ -1,0 +1,15 @@
+{# templates/contract/_form.html.twig #}
+
+{{ form_start(form) }}
+
+{{ form_row(form.vehicle_uid) }}
+{{ form_row(form.customer_uid) }}
+{{ form_row(form.sign_datetime) }}
+{{ form_row(form.loc_begin_datetime) }}
+{{ form_row(form.loc_end_datetime) }}
+{{ form_row(form.returning_datetime) }}
+{{ form_row(form.price) }}
+
+<button type="submit"> {{buttonLabel}} </button>
+
+{{ form_end(form) }}

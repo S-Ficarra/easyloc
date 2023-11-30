@@ -1,0 +1,46 @@
+{# templates/contract/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Contrats{% endblock %}
+
+{% block body %}
+    <h1>Liste des Contrats</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vehicle UID</th>
+                <th>Customer UID</th>
+                <th>Sign Datetime</th>
+                <th>Loc Begin Datetime</th>
+                <th>Loc End Datetime</th>
+                <th>Returning Datetime</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contract in contracts %}
+                <tr>
+                    <td>{{ contract.id }}</td>
+                    <td>{{ contract.vehicleUid }}</td>
+                    <td>{{ contract.customerUid }}</td>
+                    <td>{{ contract.signDatetime|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ contract.locBeginDatetime|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ contract.locEndDatetime|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ contract.returningDatetime ? contract.returningDatetime|date('Y-m-d H:i:s') : 'N/A' }}</td>
+                    <td>{{ contract.price }}</td>
+                    <td>
+                        <a href="{{ path('modifier_contrat', {'id': contract.getId() }) }}">Éditer</a>
+                        <a href="{{ path('supprimer_contrat', {'id': contract.getId() }) }}">Supprimer</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ajouter_contrat') }}">Nouveau Contrat</a>
+{% endblock %}

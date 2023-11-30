@@ -10,4 +10,15 @@ modifier_vehicule:
 supprimer_vehicule:
     path: /supprimer-vehicule/{licencePlate}
     controller: App\Controller\VehicleController::supprimerVehicule
-
+afficher_contrat:
+    path: /afficher-contrat
+    controller: App\Controller\ContractController::index
+ajouter_contrat:
+    path: /ajouter-contrat
+    controller: App\Controller\ContractController::new
+modifier_contrat:
+    path: /modifier-contrat/{id}
+    controller: App\Controller\ContractController::edit
+supprimer_contrat:
+    path: /supprimer-contrat/{id}
+    controller: App\Controller\ContractController::delete
