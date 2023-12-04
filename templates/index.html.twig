@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+
+{% block body %}
+
+<a href="{{ path('afficher_contrat') }}"><button>Aller aux contrats</button></a>
+<a href="{{ path('rechercher_vehicule') }}"><button>Aller aux véhicules</button></a>
+
+{% endblock %}

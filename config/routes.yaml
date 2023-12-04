@@ -1,3 +1,6 @@
+index:
+    path: /
+    controller: App\Controller\IndexController::indexPage
 ajouter_vehicule:
     path: /ajouter-vehicule
     controller: App\Controller\VehicleController::ajouterVehicule
