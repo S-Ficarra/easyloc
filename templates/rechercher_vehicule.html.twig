@@ -55,8 +55,8 @@
                     <td>{{ vehicle.getLicencePlate() }}</td>
                     <td>{{ vehicle.getInformations() }}</td>
                     <td>{{ vehicle.getKm() }} km</td>
-                    <td><button><a href="{{ path('modifier_vehicule', {'licencePlate': vehicle.getLicencePlate()}) }}">Modifier</a></button></td>
-                    <td><button><a href="{{ path('supprimer_vehicule', {'licencePlate': vehicle.getLicencePlate()}) }}" >Supprimer</a></button></td>
+                    <td><a href="{{ path('modifier_vehicule', {'licencePlate': vehicle.getLicencePlate()}) }}"><button>Modifier</button></a></td>
+                    <td><a href="{{ path('supprimer_vehicule', {'licencePlate': vehicle.getLicencePlate()}) }}" ><button>Supprimer</button></a></td>
 
                 </tr>
                 {% endfor %}
@@ -66,7 +66,9 @@
             </tbody>            
         </table>    
 
+        <a href="{{ path('ajouter_vehicule') }}"><button>Ajouter un véhicule</button></a>
         <a href="{{ path('index') }}"><button>Retour à l'accueil</button></a>
+        
     {% else %}
         <p>Aucun résultat trouvé.</p>
     {% endif %}

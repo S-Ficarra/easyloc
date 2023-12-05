@@ -27,7 +27,11 @@
                 </tbody>
             </table>
 
-            <div class="text-center"><button type="submit">Supprimer</button></div>
+            <div class="text-center">
+            <button type="submit">Supprimer</button>
+            <a href="{{ path('rechercher_vehicule') }}"><button>Retour aux résultats</button></a>
+            </div>
+            
         </form>
     {% endif %}
 {% endblock %}

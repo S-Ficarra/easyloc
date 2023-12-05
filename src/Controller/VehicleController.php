@@ -59,6 +59,8 @@ class VehicleController extends AbstractController
         return $this->render('ajouter_vehicule.html.twig', [
             'form' => $form->createView(),
         ]);
+
+        return new Response;
     }
 
     /**

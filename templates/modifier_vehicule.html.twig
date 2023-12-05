@@ -10,11 +10,14 @@
         </div>
         <a href="{{ path('rechercher_vehicule') }}"><button>Retour aux résultats</button></a>
     {% else %}
-    {{ form_start(form) }}
-    {{ form_row(form.licencePlate) }}
-    {{ form_row(form.informations) }}
-    {{ form_row(form.km) }}
+        {{ form_start(form) }}
+        
+        {{ form_row(form.licencePlate) }}
+        {{ form_row(form.informations) }}
+        {{ form_row(form.km) }}
 
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+
+        <a href="{{ path('rechercher_vehicule') }}"><button>Retour aux résultats</button></a>
     {% endif %}
 {% endblock %}
