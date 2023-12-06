@@ -12,6 +12,11 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    App\Command\AddVehicleCommand:
+        arguments:
+            $documentManager: '@doctrine_mongodb.odm.document_manager'
+        tags:
+            - { name: 'Symfony\Component\Console\Command\Command' }
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
