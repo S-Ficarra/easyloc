@@ -1,13 +1,13 @@
 version: '3'
+
 services:
   php:
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
+    image: php:7.4-fpm
     volumes:
       - .:/var/www/html
-    ports:
-      - "8000:9000"  # Adapté en fonction du port utilisé par PHP-FPM
+    working_dir: /var/www/html
+    expose:
+      - "9000"
 
   mongodb:
     image: mongo:latest
@@ -17,7 +17,18 @@ services:
   sqlsrv:
     image: mcr.microsoft.com/mssql/server
     environment:
-      SA_PASSWORD: DocUnix*23
-      ACCEPT_EULA: Y
+      SA_PASSWORD: "DocUnix*23"
+      ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
+
+  symfony:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - php
+      - mongodb
+      - sqlsrv
